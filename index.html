@@ -5,24 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baza danych potencjalnych klientów</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        table, th, td {
-          border:1px solid black;
+
+        * {
+            font-family: 'Prompt', sans-serif;
         }
+       .company {
+           display: flex;
+           justify-content: flex-start;
+           border-left: 1px solid black;
+       }
+
+
+        .name, .phone, .site, .mail {
+            padding: 20px 10px;
+            border-right: solid 1px black;
+            border-bottom: solid 1px black;
+            text-overflow: ellipsis;
+            overflow: hidden; 
+            white-space: nowrap;
+        }
+
+
+
+        .name {
+            background-color: rgb(196, 255, 196);
+            max-width: 415px;
+            min-width: 415px;
+            
+        }
+
+        .site, .mail {
+            max-width: 350px;
+            min-width: 350px;
+        }
+        .phone {
+            max-width: 120px;
+            min-width: 120px;
+        }
+
+        .site {
+           
+        }
+
         </style>
 </head>
 <body>
 
 
 
-    <table>
+    <div class="main">
         <!-- <tr>
           <th>Firma</th>
           <th>strona WWWW</th>
           <th>Telefon</th>
           <th>E-mail</th>
         </tr> -->
-      </table>
+    </div>
     
 
       <script>
@@ -31,23 +73,28 @@
 
 
 
-          fryzjerzy.forEach(fryzjer => {
-            const trElement = document.createElement("tr");
-          const nameTh = document.createElement('th');
-          const siteTh = document.createElement('th');
-          const phoneTh = document.createElement('th');
-          const mailTh = document.createElement('th');
+          fryzjerzy.forEach((fryzjer, index) => {
+            const trElement = document.createElement("div");
+            trElement.className = "company"
+          const nameTh = document.createElement('div');
+          nameTh.className = "name";
+          const siteTh = document.createElement('div');
+          siteTh.className = "site";
+          const phoneTh = document.createElement('div');
+          phoneTh.className = "phone";
+          const mailTh = document.createElement('div');
+          mailTh.className = "mail"
 
-          nameTh.textContent = fryzjer.name
-          siteTh.textContent = fryzjer.site
-          phoneTh.textContent = fryzjer.phone
-          mailTh.textContent = fryzjer.email
+          nameTh.innerHTML = `${index+1}. <span title="${fryzjer.name}">${fryzjer.name}</span>`
+          siteTh.innerHTML = fryzjer.site ? `<a href="${fryzjer.site}" target="_blank">${fryzjer.site}</a>` : "<span style='color: red; font-weight: bold'>nie posiada</span>"
+          phoneTh.innerHTML = `<a href="tel:${fryzjer.phone}">${fryzjer.phone}</a>`
+          mailTh.innerHTML = `<a href="mailto:${fryzjer.email}">${fryzjer.email}</a>`
 
           trElement.appendChild(nameTh);
-          trElement.appendChild(siteTh);
           trElement.appendChild(phoneTh);
+          trElement.appendChild(siteTh);
           trElement.appendChild(mailTh);
-          document.querySelector('table').appendChild(trElement);
+          document.querySelector('.main').appendChild(trElement);
           })
           
 
